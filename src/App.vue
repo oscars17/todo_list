@@ -1,28 +1,33 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  div#todo_application(v-if="app_loaded")
+    modal-wrapper
+    div.application-header
+      application-header
+    div.application-body
+      router-view
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import ApplicationHeader from "@/components/ApplicationHeader/ApplicationHeader"
+  import ModalWrapper from "@/components/Modals/ModalWrapper"
+  import { mapState } from 'vuex'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    components: {
+      'application-header': ApplicationHeader,
+      'modal-wrapper': ModalWrapper,
+    },
+    computed: {
+      ...mapState({
+        app_loaded: state => state.app_loaded
+      })
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+  @import "assets/css/main"
+  @import "assets/css/buttons"
+  @import "assets/css/transitions"
+  @import "assets/css/views"
 </style>
