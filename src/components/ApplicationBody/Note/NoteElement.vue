@@ -34,12 +34,12 @@
         div.note-details__button(v-if="!reverted")
           application-button(
             :text="cancel_last_update"
-            @on-click="revertChange(false)"
+            @on-click="revertChange(true)"
           )
         div.note-details__button(v-else)
           application-button(
             :text="restore_last_update"
-            @on-click="revertChange(true)"
+            @on-click="revertChange(false)"
           )
 </template>
 
