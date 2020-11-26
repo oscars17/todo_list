@@ -1,11 +1,11 @@
 <template lang="pug">
   div.modal-content
-    div.modal-content__header
+    div.modal-content__header.flex-row
       div.modal-content__title Удалить заметку
       div.modal-content__close
         icon-button(:icon="['far', 'times-circle']" @on-click="closeModal(close_payload)")
     div.modal-content__body
-    div.modal-content__footer
+    div.modal-content__footer.flex-row
       div.modal-content__delete-button
         app-button(:text="delete_button_text" @on-click="deletionChain")
       div.modal-content__cancel-button

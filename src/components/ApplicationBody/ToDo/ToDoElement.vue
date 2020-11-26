@@ -1,15 +1,24 @@
 <template lang="pug">
   div.todo-element.flex-row
     div.todo-element__left-col.flex-row
-      span.todo-element__checkbox
+      span.todo-element__checkbox(:class="!editable ? 'disabled' : ''")
         checkbox(:prefill_check_status="todo.checked" @on-click="setCheckStatus")
       span.todo-element__created-date {{`${this.todo.date_created}`}}
-      span.todo-element__text {{this.todo.text}}
-    div.todo-element__right-col(v-show="editable")
+      span.todo-element__input(v-show="edit")
+        input(
+          ref='todo_input'
+          v-model="text"
+          @blur="edit = false"
+          @keydown.enter="setTextEdit"
+          )
+      span.todo-element__text(v-if="!edit") {{this.text}}
+    div.todo-element__right-col.flex-row(v-show="editable")
       div.todo-element__edit(v-if="!edit")
-        icon-button(:icon="['far', 'edit']" @on-click="edit = !edit")
+        icon-button(:icon="['far', 'edit']" @on-click="setTextEdit")
       div.todo-element__finish-edit(v-else)
         icon-button(:icon="['far', 'save']" @on-click="setText")
+      div.todo-element__delete
+        icon-button(:icon="['far', 'trash-alt']" @on-click="deleteToDo")
 </template>
 
 <script>
@@ -35,12 +44,16 @@
       note_id: {
         type: Number,
         required: true,
-      }
+      },
     },
     data() {
       return {
-        edit: false
+        edit: false,
+        text: '',
       }
+    },
+    created() {
+      this.text = this.todo.text
     },
     methods: {
       ...mapMutations({
@@ -52,6 +65,11 @@
       revertElements() {
 
       },
+      setTextEdit() {
+        this.edit = !this.edit
+        const input = this.$refs['todo_input']
+        this.$nextTick(() => input.focus())
+      },
       setCheckStatus(data) {
         const payload = {
           checked: data,
@@ -60,15 +78,18 @@
         }
         this.setToDoUpdate(payload)
       },
-      setText(data) {
+      setText() {
         const payload = {
-          text: data,
+          text: this.text,
           note_id: this.note_id,
           todo_id: this.todo.id
         }
         this.edit = !this.edit
         this.setToDoUpdate(payload)
-      }
+      },
+      deleteToDo() {
+
+      },
     }
   }
 </script>

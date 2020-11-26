@@ -6,9 +6,6 @@
         @on-click="$router.push({name: 'index'})"
         )
     div.application-header__right.flex-row
-      icon-button(
-        :icon="['far', 'sticky-note']"
-      )
 </template>
 
 <script>

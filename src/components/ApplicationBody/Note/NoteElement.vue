@@ -93,7 +93,7 @@
       openDeleteModal() {
         const payload = {
           modal_type: 'note_delete_modal',
-          id: this.note_id
+          id: this.note.id
         }
         return this.openModal(payload)
       },

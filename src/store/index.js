@@ -11,11 +11,11 @@ const store = new Vuex.Store({
     state: () => ({
         note_list: [],
         app_loaded: false,
-        additional_todo_list: [],
+        additional_todo_list: [], // work in progress
     }),
     mutations: {
         ADD_ADDITIONAL_TODO(state) {
-            state.additional_todo_list.push({})
+            state.additional_todo_list.push({}) // work in progress
         },
         SET_APP_LOADING(state, bool) {
           state.app_loaded = bool
@@ -43,6 +43,9 @@ const store = new Vuex.Store({
                     return state.note_list.splice(i, 1, new_note)
                 }
             })
+        },
+        DELETE_TODO() {
+            //in progress
         },
         SET_TODO_UPDATE(state, payload) {
             state.note_list.forEach((note, i) => {
