@@ -47,7 +47,7 @@ new Vue({
       localStorage.setItem('note_list', JSON.stringify(example_data))
       note_list = localStorage.getItem('note_list')
     }
-    else store.commit('SET_NOTE_LIST', JSON.parse(note_list))
+    store.commit('SET_NOTE_LIST', JSON.parse(note_list))
     store.commit('SET_APP_LOADING', true)
   },
 }).$mount('#app')
